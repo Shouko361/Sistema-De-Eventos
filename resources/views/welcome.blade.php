@@ -23,9 +23,6 @@
                                         <a href="/events/{{ $event->id }}" class="btn btn-primary">Saber mais</a>
                                 </div>
                             </div>
-                            <div>
-                                    <h1>teste</h1>
-                            </div>
                         @endforeach
                 </div>
         </div>

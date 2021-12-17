@@ -60,14 +60,17 @@
                     <td><a href="/events/{{ $event->id }}">{{ $event->title }}</a></td>
                     <td>{{ count($event->users) }}</td>
                     <td>
-                        <form action=""></form>
+                        <form action="/events/leave/{{ $event->id }}" method="POST">
+                        @csrf
+                        @method('DELETE')
                         <button type="submit" class="btn btn-danger delete-btn"><ion-icon name="exit-outline"></ion-icon> Sair do evento</button></td>
+                        </form>
                 </tr>
             @endforeach
         </tbody>
     </table>
 @else
-    <p>Você ainda não está participando de nenhum evento,<a href="/">veja todos os eventos</a></p>
+    <p>Você ainda não está participando de nenhum evento,<a href="/"> veja todos os eventos</a></p>
 @endif
 </div>
 @endsection

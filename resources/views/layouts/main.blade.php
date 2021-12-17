@@ -9,6 +9,7 @@
         <!-- CSS da aplicação -->
         <link rel="stylesheet" href="/css/styles.css">
         <script src="/js/scripts.js"></script>
+        <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">

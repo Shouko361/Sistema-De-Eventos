@@ -224,6 +224,19 @@ a.btn-primary:hover{
   display: inline-block;
 }
 
+.dashboard-events-container tbody td a{
+    text-decoration: none;
+    color: blue;
+  }
+
+/* Edit page */
+
+.img-preview{
+    width: 250px;
+    margin-bottom: 40px;
+    border-radius: 15px;
+}
+
 /* Footer */
 
 footer {

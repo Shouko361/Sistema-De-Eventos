@@ -77,12 +77,26 @@ class EventController extends Controller
 
         $events = $user->events;
 
-        return view('events.dashboard', ['events' => $events]);    
+        $eventsAsParticipant = $user->eventsAsParticipants;
+
+        return view('events.dashboard', ['events' => $events, 'eventsasparticipant' => $eventsAsParticipant]);    
     }
 
     public function destroy($id){
 
-        Event::findOrFail($id)->delete();
+        $user = auth()->user();
+
+        $events = $user->events;
+
+        $eventsAsParticipant = $user->eventsAsParticipants;
+
+        if(count($eventsAsParticipant) > 0){
+            return redirect('/dashboard')->with('msg', 'Existem pessoas neste evento');    
+        }else{
+
+            Event::findOrFail($id)->delete();
+        
+        }
 
         return redirect('/dashboard')->with('msg', 'Evento excluido com sucesso!');
 
@@ -90,7 +104,13 @@ class EventController extends Controller
 
     public function edit($id){
 
+        $user = auth()->user();
+
         $event = Event::findOrFail($id);
+
+        if($user->id != $event->user_id){
+            return redirect('/dashboard')->with('msg', 'Você não pode editar esse evento');
+        }
 
         return view('events.edit', ['events' => $event]);
 
@@ -112,6 +132,18 @@ class EventController extends Controller
         Event::findOrFail($request->id)->update($data);
 
         return redirect('/dashboard')->with('msg', 'Evento alterado com sucesso!');
+
+    }
+
+    public function joinEvent($id){
+
+        $user = auth()->user();
+
+        $user->eventsAsParticipants()->attach($id);
+        $events = Event::findOrFail($id);
+
+        return redirect('/')->with('msg', 'Presença confirmada!');
+
 
     }
 }
